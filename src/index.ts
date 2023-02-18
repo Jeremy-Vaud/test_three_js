@@ -1,4 +1,4 @@
-import { Scene, PerspectiveCamera, WebGLRenderer, Mesh, MeshBasicMaterial, SphereGeometry } from 'three'
+import { Scene, PerspectiveCamera, WebGLRenderer, Mesh, MeshBasicMaterial, SphereGeometry, MeshStandardMaterial, PointLight } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 // Scène
@@ -24,35 +24,38 @@ window.addEventListener("resize", () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.render(scene, camera);
 })
+// Lumieère
+const light = new PointLight( "white", 2, 1000 );
+scene.add( light );
 
 const sunGeometry = new SphereGeometry(10,64,64)
 const sunMaterial = new MeshBasicMaterial({color: 'yellow'})
 const sun = new Mesh(sunGeometry, sunMaterial)
 scene.add(sun)
 
-const mecureGeometry = new SphereGeometry(1,64,64)
-mecureGeometry.translate(-50,0,0)
-const mercuryMaterial = new MeshBasicMaterial({color: 'orange'})
+const mecureGeometry = new SphereGeometry(.5,64,64)
+mecureGeometry.translate(60,0,0)
+const mercuryMaterial = new MeshStandardMaterial({color: 'orange'})
 const mercury = new Mesh(mecureGeometry, mercuryMaterial)
-sun.add(mercury)
+scene.add(mercury)
 
-const venusGeometry = new SphereGeometry(2,64,64)
-venusGeometry.translate(-75,0,0)
-const venusMaterial = new MeshBasicMaterial({color: 'green'})
+const venusGeometry = new SphereGeometry(1.2,64,64)
+venusGeometry.translate(110,0,0)
+const venusMaterial = new MeshStandardMaterial({color: 'green'})
 const venus = new Mesh(venusGeometry, venusMaterial)
-sun.add(venus)
+scene.add(venus)
 
-const earthGeometry = new SphereGeometry(4,64,64)
-earthGeometry.translate(100,0,0)
-const earthMaterial = new MeshBasicMaterial({color: 'blue'})
+const earthGeometry = new SphereGeometry(1.3,64,64)
+earthGeometry.translate(150,0,0)
+const earthMaterial = new MeshStandardMaterial({color: 'blue'})
 const earth = new Mesh(earthGeometry, earthMaterial)
-sun.add(earth)
+scene.add(earth)
 
-const marsGeometry = new SphereGeometry(3,64,64)
-marsGeometry.translate(125,0,0)
-const marsMaterial = new MeshBasicMaterial({color: 'red'})
+const marsGeometry = new SphereGeometry(.7,64,64)
+marsGeometry.translate(230,0,0)
+const marsMaterial = new MeshStandardMaterial({color: 'red'})
 const mars = new Mesh(marsGeometry, marsMaterial)
-sun.add(mars)
+scene.add(mars)
 
 function animate() {
     renderer.render(scene, camera)
